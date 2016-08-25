@@ -29,10 +29,16 @@
       <bpmn:sequenceFlow id="SequenceFlow_0tt2wgn" sourceRef="Task_0ztokdp" targetRef="Task_167tfcr" />
       <bpmn:sequenceFlow id="SequenceFlow_0ndxl76" sourceRef="Task_167tfcr" targetRef="Task_0n0z9hh" />
       <bpmn:serviceTask id="Task_167tfcr" name="Complete &#34;Enter Candidate Details&#34;" camunda:asyncBefore="true" camunda:class="org.camunda.hackdays2016.BanMadInkProcesses.CompleteEnterCandidateDetailsDelegate">
+        <bpmn:extensionElements>
+          <camunda:failedJobRetryTimeCycle>R5\1M</camunda:failedJobRetryTimeCycle>
+        </bpmn:extensionElements>
         <bpmn:incoming>SequenceFlow_0tt2wgn</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_0ndxl76</bpmn:outgoing>
       </bpmn:serviceTask>
       <bpmn:serviceTask id="Task_0n0z9hh" name="Complete &#34;Enter Application Details&#34;" camunda:asyncBefore="true" camunda:class="org.camunda.hackdays2016.BanMadInkProcesses.CompleteEnterApplicationDetailsDelegate">
+        <bpmn:extensionElements>
+          <camunda:failedJobRetryTimeCycle>R5\1M</camunda:failedJobRetryTimeCycle>
+        </bpmn:extensionElements>
         <bpmn:incoming>SequenceFlow_0ndxl76</bpmn:incoming>
         <bpmn:incoming>SequenceFlow_10mxxpy</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_167mcc6</bpmn:outgoing>
@@ -43,6 +49,9 @@
       <bpmn:sequenceFlow id="SequenceFlow_167mcc6" sourceRef="Task_0n0z9hh" targetRef="Task_00dzzkk" />
       <bpmn:sequenceFlow id="SequenceFlow_01ddxhy" sourceRef="Task_00dzzkk" targetRef="EndEvent_1gxub9e" />
       <bpmn:serviceTask id="Task_00dzzkk" name="Complete &#34;Decide on Further Fraud Check&#34;" camunda:asyncBefore="true" camunda:class="org.camunda.hackdays2016.BanMadInkProcesses.CompleteDecideOnFurtherFraudCheckDelegate">
+        <bpmn:extensionElements>
+          <camunda:failedJobRetryTimeCycle>R5\1M</camunda:failedJobRetryTimeCycle>
+        </bpmn:extensionElements>
         <bpmn:incoming>SequenceFlow_167mcc6</bpmn:incoming>
         <bpmn:outgoing>SequenceFlow_01ddxhy</bpmn:outgoing>
       </bpmn:serviceTask>

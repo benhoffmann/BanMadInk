@@ -33,18 +33,17 @@
       <bpmn:outgoing>SequenceFlow_0c771b2</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0ldrfww</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="SequenceFlow_0i603v9" sourceRef="Task_0zeut6n" targetRef="IntermediateThrowEvent_0l7781p" />
     <bpmn:businessRuleTask id="Task_0zeut6n" name="Calculate Fraud Score" camunda:resultVariable="fraudScore" camunda:decisionRef="fraudRating" camunda:mapDecisionResult="singleEntry">
       <bpmn:incoming>SequenceFlow_1lj8l0l</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0i603v9</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_10b6jax</bpmn:outgoing>
     </bpmn:businessRuleTask>
-    <bpmn:sequenceFlow id="SequenceFlow_1j80dfy" sourceRef="Task_DecideOnFurtherFraudCheck" targetRef="ExclusiveGateway_0rzzhok" />
+    <bpmn:sequenceFlow id="SequenceFlow_1j80dfy" sourceRef="Task_DecideOnFurtherFraudCheck" targetRef="IntermediateThrowEvent_0l7781p" />
     <bpmn:userTask id="Task_DecideOnFurtherFraudCheck" name="Decide on Further Fraud Check" camunda:asyncBefore="true" camunda:formKey="embedded:app:forms/embedded/audit-choice-form.html" camunda:candidateGroups="media-assessment" camunda:priority="#{fraudScore}">
-      <bpmn:incoming>SequenceFlow_0ocwzrx</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_10b6jax</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1j80dfy</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:exclusiveGateway id="ExclusiveGateway_0rzzhok" name="Should Applicaiton be Checked for Fraud?">
-      <bpmn:incoming>SequenceFlow_1j80dfy</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_14xvhbq</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_036hcph</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0hq8s6y</bpmn:outgoing>
     </bpmn:exclusiveGateway>
@@ -83,10 +82,11 @@
         </camunda:inputOutput>
         <camunda:executionListener class="org.camunda.hackdays2016.BanMadInkProcesses.HistoricDecisionListener" event="start" />
       </bpmn:extensionElements>
-      <bpmn:incoming>SequenceFlow_0i603v9</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0ocwzrx</bpmn:outgoing>
+      <bpmn:incoming>SequenceFlow_1j80dfy</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_14xvhbq</bpmn:outgoing>
     </bpmn:intermediateThrowEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_0ocwzrx" sourceRef="IntermediateThrowEvent_0l7781p" targetRef="Task_DecideOnFurtherFraudCheck" />
+    <bpmn:sequenceFlow id="SequenceFlow_10b6jax" sourceRef="Task_0zeut6n" targetRef="Task_DecideOnFurtherFraudCheck" />
+    <bpmn:sequenceFlow id="SequenceFlow_14xvhbq" sourceRef="IntermediateThrowEvent_0l7781p" targetRef="ExclusiveGateway_0rzzhok" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="InsurencePaymentCheck">
@@ -159,25 +159,18 @@
           <dc:Bounds x="552" y="145" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_0i603v9_di" bpmnElement="SequenceFlow_0i603v9">
-        <di:waypoint xsi:type="dc:Point" x="985" y="120" />
-        <di:waypoint xsi:type="dc:Point" x="1062" y="120" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="978.5" y="95" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="BusinessRuleTask_18l3bgj_di" bpmnElement="Task_0zeut6n">
         <dc:Bounds x="885" y="80" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1j80dfy_di" bpmnElement="SequenceFlow_1j80dfy">
-        <di:waypoint xsi:type="dc:Point" x="1282" y="120" />
-        <di:waypoint xsi:type="dc:Point" x="1355" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="1185" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="1241" y="120" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1274" y="95" width="90" height="20" />
+          <dc:Bounds x="1168" y="95" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_14tu5uo_di" bpmnElement="Task_DecideOnFurtherFraudCheck">
-        <dc:Bounds x="1182" y="80" width="100" height="80" />
+        <dc:Bounds x="1085" y="80" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_0rzzhok_di" bpmnElement="ExclusiveGateway_0rzzhok" isMarkerVisible="true">
         <dc:Bounds x="1355" y="95" width="50" height="50" />
@@ -227,16 +220,23 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="IntermediateThrowEvent_0l7781p_di" bpmnElement="IntermediateThrowEvent_0l7781p">
-        <dc:Bounds x="1062.222" y="102" width="36" height="36" />
+        <dc:Bounds x="1241" y="102" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1035.222" y="138" width="90" height="20" />
+          <dc:Bounds x="1214" y="138" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_0ocwzrx_di" bpmnElement="SequenceFlow_0ocwzrx">
-        <di:waypoint xsi:type="dc:Point" x="1098" y="120" />
-        <di:waypoint xsi:type="dc:Point" x="1182" y="120" />
+      <bpmndi:BPMNEdge id="SequenceFlow_10b6jax_di" bpmnElement="SequenceFlow_10b6jax">
+        <di:waypoint xsi:type="dc:Point" x="985" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="1085" y="120" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1095" y="95" width="90" height="20" />
+          <dc:Bounds x="990" y="95" width="90" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_14xvhbq_di" bpmnElement="SequenceFlow_14xvhbq">
+        <di:waypoint xsi:type="dc:Point" x="1277" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="1355" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1271" y="95" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>

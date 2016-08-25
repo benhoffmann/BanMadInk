@@ -50,9 +50,13 @@ public class InMemoryH2Test {
   @Deployment(resources = {"process.bpmn", "assignment.dmn","fraudRating.dmn", "generateTestData.bpmn"})
   public void testDataGeneration() {
 	  Map<String, Object> vars = new HashMap<String, Object>();
-	  vars.put("numberOfInstances", 50);
+	  vars.put("numberOfInstances", 10);
 	  
 	  ProcessInstance processInstance = processEngine().getRuntimeService().startProcessInstanceByKey("generateDataProcess", vars);
+	  
+//	  execute(job());
+//	  
+//	  assertThat(processInstance.isEnded());
   }
 
   @Test
@@ -76,31 +80,31 @@ public class InMemoryH2Test {
 
 	  // Task_EnterCandidateDetails
 
-	  execute(job());
-	  	  
-	  Task theFirstTask = rule.getTaskService().createTaskQuery().singleResult();
-	  
-	  rule.getTaskService().complete(theFirstTask.getId(), vars);
-	  
+//	  execute(job());
+//	  	  
+//	  Task theFirstTask = rule.getTaskService().createTaskQuery().singleResult();
+//	  
+//	  rule.getTaskService().complete(theFirstTask.getId(), vars);
+//	  
 	  // Task_EnterApplicationDetails
 	  
-	  execute(job()); 
-	  complete(task());
-	  
-	  // IntermediateThrowEvent_0l7781p
-	  
-	  execute(job());
-
-	  
-	  // Task_DecideOnFurtherFraudCheck
-	  
-	  execute(job());
-	  complete(task());
-
-	  
-
-	  
-	  assertThat(processInstance).isEnded();
+//	  execute(job()); 
+//	  complete(task());
+//	  
+//	  // IntermediateThrowEvent_0l7781p
+//	  
+//	  execute(job());
+//
+//	  
+//	  // Task_DecideOnFurtherFraudCheck
+//	  
+//	  execute(job());
+//	  complete(task());
+//
+//	  
+//
+//	  
+//	  assertThat(processInstance).isEnded();
 	  
 	// To generate the coverage report for a single tests add this line as the last line of your test method:
 	//ProcessTestCoverage.calculate(processInstance, rule.getProcessEngine());

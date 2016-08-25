@@ -32,8 +32,12 @@ public class CompleteDecideOnFurtherFraudCheckDelegate implements JavaDelegate {
 		 }
 		 
 		 Task currentTask = execution.getProcessEngineServices().getTaskService().createTaskQuery().processInstanceBusinessKey(busKey).singleResult();
-	  
-		  execution.getProcessEngineServices().getTaskService().complete(currentTask.getId(), vars);
+//		 while(currentTask ==  null){
+//			 Thread.sleep(1000);
+//			 currentTask = execution.getProcessEngineServices().getTaskService().createTaskQuery().processInstanceBusinessKey(busKey).singleResult();
+//
+//		 }
+		 execution.getProcessEngineServices().getTaskService().complete(currentTask.getId(), vars);
 
 		
 
