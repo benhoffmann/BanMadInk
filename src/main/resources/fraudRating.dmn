@@ -15,7 +15,7 @@
 </inputExpression>
       </input>
       <input id="InputClause_1m6kd8l" label="Payout Amount">
-        <inputExpression id="LiteralExpression_02te1go" typeRef="long">        <text>claimAmount</text>
+        <inputExpression id="LiteralExpression_02te1go" typeRef="double">        <text>claimAmount</text>
 </inputExpression>
       </input>
       <output id="output1" label="Fraud Score" name="fraudScore" typeRef="integer" />

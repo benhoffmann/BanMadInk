@@ -3,20 +3,72 @@ package org.camunda.hackdays2016.BanMadInkProcesses;
 public class FraudScoreTableObject {
 	
 	String tableName = "fraudRating";
+	String processInstanceID;
 	String fraudInstanceID;
 	//inputs
 	boolean paymentRejected;
 	int numberOfPayouts;
 	boolean historyOfFraud;
-	long calimAmount;
+	double calimAmount;
 	
 	//Output
 	int fraudScore;
 
 	
+	//Process Variables
+	//claimType
+	//region 
+	//audit 
+	//userName 
+	String claimType;
+	String region;
+	boolean requiredAudit;
+	String nameOfAssignedUser;
 	
 	
 	
+	
+	
+	public String getClaimType() {
+		return claimType;
+	}
+
+	public void setClaimType(String claimType) {
+		this.claimType = claimType;
+	}
+
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+
+	public boolean isRequiredAudit() {
+		return requiredAudit;
+	}
+
+	public void setRequiredAudit(boolean requiredAudit) {
+		this.requiredAudit = requiredAudit;
+	}
+
+	public String getNameOfAssignedUser() {
+		return nameOfAssignedUser;
+	}
+
+	public void setNameOfAssignedUser(String nameOfAssignedUser) {
+		this.nameOfAssignedUser = nameOfAssignedUser;
+	}
+
+	public String getProcessInstanceID() {
+		return processInstanceID;
+	}
+
+	public void setProcessInstanceID(String processInstanceID) {
+		this.processInstanceID = processInstanceID;
+	}
+
 	public String getFraudInstanceID() {
 		return fraudInstanceID;
 	}
@@ -57,12 +109,12 @@ public class FraudScoreTableObject {
 		this.historyOfFraud = historyOfFraud;
 	}
 
-	public long isCalimAmount() {
+	public double getCalimAmount() {
 		return calimAmount;
 	}
 
-	public void setCalimAmount(long calimAmount) {
-		this.calimAmount = calimAmount;
+	public void setCalimAmount(double d) {
+		this.calimAmount = d;
 	}
 
 	public int getFraudScore() {
