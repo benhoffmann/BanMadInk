@@ -9,7 +9,7 @@
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow1" sourceRef="StartEventProcessStarted" targetRef="Task_EnterCandidateDetails" />
     <bpmn:sequenceFlow id="SequenceFlow_0cmy20q" sourceRef="Task_EnterCandidateDetails" targetRef="Task_0q6qsn7" />
-    <bpmn:userTask id="Task_EnterCandidateDetails" name="Enter Candidate Details" camunda:asyncBefore="true" camunda:formKey="embedded:app:forms/embedded/candidate-data-entry-form.html" camunda:candidateGroups="media-assessment">
+    <bpmn:userTask id="Task_EnterCandidateDetails" name="Enter Candidate Details" camunda:formKey="embedded:app:forms/embedded/candidate-data-entry-form.html" camunda:candidateGroups="media-assessment">
       <bpmn:incoming>SequenceFlow1</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0cmy20q</bpmn:outgoing>
     </bpmn:userTask>
@@ -20,10 +20,10 @@
     </bpmn:businessRuleTask>
     <bpmn:sequenceFlow id="SequenceFlow_0ldrfww" name="Yes" sourceRef="ExclusiveGateway_1244vx1" targetRef="Task_EnterApplicationDetails" />
     <bpmn:sequenceFlow id="SequenceFlow_0c771b2" name="No" sourceRef="ExclusiveGateway_1244vx1" targetRef="Task_Select_Manual_User">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[#{userName == 'NONE'}]]></bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{false}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1lj8l0l" sourceRef="Task_EnterApplicationDetails" targetRef="Task_0zeut6n" />
-    <bpmn:userTask id="Task_EnterApplicationDetails" name="Enter Application Details" camunda:asyncBefore="true" camunda:formKey="embedded:app:forms/embedded/enter-media-details-form.html" camunda:assignee="#{userName}" camunda:candidateGroups="media-analyst">
+    <bpmn:userTask id="Task_EnterApplicationDetails" name="Enter Application Details" camunda:formKey="embedded:app:forms/embedded/enter-media-details-form.html" camunda:assignee="#{userName}" camunda:candidateGroups="media-analyst">
       <bpmn:incoming>SequenceFlow_0ldrfww</bpmn:incoming>
       <bpmn:incoming>SequenceFlow_1mmbrox</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1lj8l0l</bpmn:outgoing>
@@ -37,13 +37,12 @@
       <bpmn:incoming>SequenceFlow_1lj8l0l</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_10b6jax</bpmn:outgoing>
     </bpmn:businessRuleTask>
-    <bpmn:sequenceFlow id="SequenceFlow_1j80dfy" sourceRef="Task_DecideOnFurtherFraudCheck" targetRef="IntermediateThrowEvent_0l7781p" />
-    <bpmn:userTask id="Task_DecideOnFurtherFraudCheck" name="Decide on Further Fraud Check" camunda:asyncBefore="true" camunda:formKey="embedded:app:forms/embedded/audit-choice-form.html" camunda:candidateGroups="media-assessment" camunda:priority="#{fraudScore}">
+    <bpmn:userTask id="Task_DecideOnFurtherFraudCheck" name="Decide on Further Fraud Check" camunda:formKey="embedded:app:forms/embedded/audit-choice-form.html" camunda:candidateGroups="media-assessment" camunda:priority="#{fraudScore}">
       <bpmn:incoming>SequenceFlow_10b6jax</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1j80dfy</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_142cb5z</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:exclusiveGateway id="ExclusiveGateway_0rzzhok" name="Should Applicaiton be Checked for Fraud?">
-      <bpmn:incoming>SequenceFlow_14xvhbq</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_142cb5z</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_036hcph</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0hq8s6y</bpmn:outgoing>
     </bpmn:exclusiveGateway>
@@ -57,7 +56,6 @@
     <bpmn:sequenceFlow id="SequenceFlow_1mmbrox" sourceRef="Task_Select_Manual_User" targetRef="Task_EnterApplicationDetails" />
     <bpmn:userTask id="Task_Select_Manual_User" name="Select Manual User" camunda:candidateGroups="media-assessment">
       <bpmn:extensionElements>
-        <camunda:taskListener class="org.camunda.demo.BPMCamp.GetCurrentUsersListener" event="assignment" />
         <camunda:formData>
           <camunda:formField id="userName" label="Pick a User" type="enum" defaultValue="#{users}" />
         </camunda:formData>
@@ -82,11 +80,9 @@
         </camunda:inputOutput>
         <camunda:executionListener class="org.camunda.hackdays2016.BanMadInkProcesses.HistoricDecisionListener" event="start" />
       </bpmn:extensionElements>
-      <bpmn:incoming>SequenceFlow_1j80dfy</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_14xvhbq</bpmn:outgoing>
     </bpmn:intermediateThrowEvent>
     <bpmn:sequenceFlow id="SequenceFlow_10b6jax" sourceRef="Task_0zeut6n" targetRef="Task_DecideOnFurtherFraudCheck" />
-    <bpmn:sequenceFlow id="SequenceFlow_14xvhbq" sourceRef="IntermediateThrowEvent_0l7781p" targetRef="ExclusiveGateway_0rzzhok" />
+    <bpmn:sequenceFlow id="SequenceFlow_142cb5z" sourceRef="Task_DecideOnFurtherFraudCheck" targetRef="ExclusiveGateway_0rzzhok" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="InsurencePaymentCheck">
@@ -162,13 +158,6 @@
       <bpmndi:BPMNShape id="BusinessRuleTask_18l3bgj_di" bpmnElement="Task_0zeut6n">
         <dc:Bounds x="885" y="80" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_1j80dfy_di" bpmnElement="SequenceFlow_1j80dfy">
-        <di:waypoint xsi:type="dc:Point" x="1185" y="120" />
-        <di:waypoint xsi:type="dc:Point" x="1241" y="120" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1168" y="95" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_14tu5uo_di" bpmnElement="Task_DecideOnFurtherFraudCheck">
         <dc:Bounds x="1085" y="80" width="100" height="80" />
       </bpmndi:BPMNShape>
@@ -220,9 +209,9 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="IntermediateThrowEvent_0l7781p_di" bpmnElement="IntermediateThrowEvent_0l7781p">
-        <dc:Bounds x="1241" y="102" width="36" height="36" />
+        <dc:Bounds x="1251" y="-35" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1214" y="138" width="90" height="20" />
+          <dc:Bounds x="1224" y="1" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_10b6jax_di" bpmnElement="SequenceFlow_10b6jax">
@@ -232,11 +221,11 @@
           <dc:Bounds x="990" y="95" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_14xvhbq_di" bpmnElement="SequenceFlow_14xvhbq">
-        <di:waypoint xsi:type="dc:Point" x="1277" y="120" />
+      <bpmndi:BPMNEdge id="SequenceFlow_142cb5z_di" bpmnElement="SequenceFlow_142cb5z">
+        <di:waypoint xsi:type="dc:Point" x="1185" y="120" />
         <di:waypoint xsi:type="dc:Point" x="1355" y="120" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1271" y="95" width="90" height="20" />
+          <dc:Bounds x="1225" y="95" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>

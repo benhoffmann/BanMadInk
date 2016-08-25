@@ -58,10 +58,14 @@ public class HistoricDecisionListener implements ExecutionListener {
 		}
 		List<HistoricDecisionOutputInstance> outputs = historicDecisionInstance.getOutputs();
 		for (HistoricDecisionOutputInstance historicDecisionOutputInstance : outputs) {
+			
 			String inputName = historicDecisionOutputInstance.getTypeName();
 			if(inputName.equals("frausScore")){
 				fraudData.setFraudScore((Integer)historicDecisionOutputInstance.getValue());
+				
 			}
+			
+			
 		}		
 		
 		ObjectMapper mapper = new ObjectMapper();

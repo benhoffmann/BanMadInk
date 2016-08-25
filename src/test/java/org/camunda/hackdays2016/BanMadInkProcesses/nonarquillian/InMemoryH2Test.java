@@ -47,6 +47,19 @@ public class InMemoryH2Test {
   }
   
   @Test
+  @Deployment(resources = {"process.bpmn", "assignment.dmn","fraudRating.dmn", "generateTestData.bpmn", "loadElasticSearch.bpmn"})
+  public void testLoadelasticGeneration() {
+	  Map<String, Object> vars = new HashMap<String, Object>();
+	  vars.put("numberOfInstances", 10);
+	  
+	  ProcessInstance processInstance = processEngine().getRuntimeService().startProcessInstanceByKey("loadToElasticSearch");
+	  
+//	  execute(job());
+//	  
+//	  assertThat(processInstance.isEnded());
+  }
+  
+  @Test
   @Deployment(resources = {"process.bpmn", "assignment.dmn","fraudRating.dmn", "generateTestData.bpmn"})
   public void testDataGeneration() {
 	  Map<String, Object> vars = new HashMap<String, Object>();

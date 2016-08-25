@@ -25,7 +25,7 @@ public class CompleteEnterCandidateDetailsDelegate implements JavaDelegate {
 		  vars.put("region", randomUtil.getRandomRegion());
 		  
 		  Task theFirstTask = execution.getProcessEngineServices().getTaskService().createTaskQuery().processInstanceBusinessKey(busKey).singleResult();
-//		  
+  
 		  execution.getProcessEngineServices().getTaskService().complete(theFirstTask.getId(), vars);
 
 		

@@ -30,7 +30,7 @@ public class CompleteEnterApplicationDetailsDelegate implements JavaDelegate {
 	  vars.put("userDeterminedFraud", randomUtil.getRandomUserDeterminedFraud());
 	  
 	  Task currentTask = execution.getProcessEngineServices().getTaskService().createTaskQuery().processInstanceBusinessKey(busKey).singleResult();
-	  
+
 	  if(currentTask.getTaskDefinitionKey().equals("Task_Select_Manual_User")){
 		  execution.getProcessEngineServices().getTaskService().complete(currentTask.getId(), vars);
 		  throw new BpmnError("TASK_NOT_FOUND");
