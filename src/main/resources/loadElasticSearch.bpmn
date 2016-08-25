@@ -10,7 +10,7 @@
       <bpmn:incoming>SequenceFlow_1ihgpop</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0ooervp</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:startEvent id="StartEvent_1">
+    <bpmn:startEvent id="StartEvent_1" name="Every 5 minutes">
       <bpmn:extensionElements>
         <camunda:formData>
           <camunda:formField id="GettAllData" label="Do you want to get all data?" type="boolean" />
@@ -18,7 +18,7 @@
       </bpmn:extensionElements>
       <bpmn:outgoing>SequenceFlow_1ihgpop</bpmn:outgoing>
       <bpmn:timerEventDefinition>
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT20M</bpmn:timeDuration>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">0 0/5 * 1/1 * ? *</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:startEvent>
   </bpmn:process>
