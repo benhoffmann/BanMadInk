@@ -13,10 +13,8 @@ public class CompleteEnterApplicationDetailsDelegate implements JavaDelegate {
 
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
-		//paymentRejected
-		//numberOfPayouts
-		//historyOfFraud
-		//userDeterminedFraud
+
+     		
 
 	  Map<String, Object> vars = new HashMap<String, Object>();
 	  

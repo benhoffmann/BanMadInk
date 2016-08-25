@@ -1,7 +1,8 @@
 package org.camunda.hackdays2016.BanMadInkProcesses;
 
 import java.net.InetAddress;
-import java.util.Calendar;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -32,7 +33,7 @@ public class LoadToElasticSearch implements JavaDelegate {
 			}
 			
 			HistoryService historyService = execution.getProcessEngineServices().getHistoryService();
-			
+			RandomGeneratorUtil randomGenerator = new RandomGeneratorUtil();
 			Date twentyMinsAgo = new Date(System.currentTimeMillis()-20*60*1000);
 			
 			List<HistoricDecisionInstance> historicDecisionInstances = historyService.createHistoricDecisionInstanceQuery()
@@ -97,6 +98,7 @@ public class LoadToElasticSearch implements JavaDelegate {
 						else if(historicVariableInstance.getName().equals("audit")){
 							fraudData.setRequiredAudit((Boolean)historicVariableInstance.getValue());
 						}
+						
 						else if(historicVariableInstance.getName().equals("userName")){
 							fraudData.setNameOfAssignedUser((String)historicVariableInstance.getValue());
 						}
@@ -108,10 +110,13 @@ public class LoadToElasticSearch implements JavaDelegate {
 						}
 					}
 
-				
+					fraudData.setDateOfClaim(randomGenerator.getRandomDate());
 				
 				}
+				//2015-05-18T09:09:36.889Z
 				ObjectMapper mapper = new ObjectMapper();
+				DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+				mapper.setDateFormat(df);
 	
 				 String serializedHistoricDecisionInstance = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(fraudData);
 					

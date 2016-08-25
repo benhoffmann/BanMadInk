@@ -1,5 +1,7 @@
 package org.camunda.hackdays2016.BanMadInkProcesses;
 
+import java.util.Date;
+
 public class FraudScoreTableObject {
 	
 	String tableName = "fraudRating";
@@ -16,19 +18,27 @@ public class FraudScoreTableObject {
 
 	
 	//Process Variables
-	//claimType
-	//region 
-	//audit 
-	//userName 
+
 	String claimType;
 	String region;
 	boolean requiredAudit;
 	String nameOfAssignedUser;
 	
 	
+	//fake variables
+	Date dateOfClaim;
 	
 	
 	
+	
+	public Date getDateOfClaim() {
+		return dateOfClaim;
+	}
+
+	public void setDateOfClaim(Date dateOfClaim) {
+		this.dateOfClaim = dateOfClaim;
+	}
+
 	public String getClaimType() {
 		return claimType;
 	}
