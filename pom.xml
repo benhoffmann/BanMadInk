@@ -194,6 +194,7 @@
       <artifactId>jul-to-slf4j</artifactId>
       <version>1.7.7</version>
       <scope>test</scope>
+      
     </dependency>
 		<dependency>
 		<groupId>org.elasticsearch</groupId>

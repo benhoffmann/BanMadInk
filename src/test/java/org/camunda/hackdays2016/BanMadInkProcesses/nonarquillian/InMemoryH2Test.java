@@ -74,31 +74,36 @@ public class InMemoryH2Test {
 	  vars.put("claimAmount", 500);
 	  vars.put("audit", false);
 
-	  
+	  // Task_EnterCandidateDetails
+
 	  execute(job());
-	  
+	  	  
 	  Task theFirstTask = rule.getTaskService().createTaskQuery().singleResult();
 	  
 	  rule.getTaskService().complete(theFirstTask.getId(), vars);
 	  
-	  execute(job());
-
+	  // Task_EnterApplicationDetails
 	  
+	  execute(job()); 
 	  complete(task());
 	  
+	  // IntermediateThrowEvent_0l7781p
+	  
 	  execute(job());
 
 	  
-	//  Task theSecondTask = rule.getTaskService().createTaskQuery().singleResult();
-	  
-	  // Now: Drive the process by API and assert correct behavior by camunda-bpm-assert
-	  
-	  // To generate the coverage report for a single tests add this line as the last line of your test method:
-	  //ProcessTestCoverage.calculate(processInstance, rule.getProcessEngine());
+	  // Task_DecideOnFurtherFraudCheck
 	  
 	  execute(job());
+	  complete(task());
+
+	  
+
 	  
 	  assertThat(processInstance).isEnded();
+	  
+	// To generate the coverage report for a single tests add this line as the last line of your test method:
+	//ProcessTestCoverage.calculate(processInstance, rule.getProcessEngine());
   }
 
   @After

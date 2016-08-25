@@ -32,14 +32,16 @@ public class HistoricDecisionListener implements ExecutionListener {
 																	.singleResult();
 	
 		
+		
 		ObjectMapper mapper = new ObjectMapper();
 
-		String serializedHistoricDecisionInstance = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(historicDecisionInstance);
+		 String serializedHistoricDecisionInstance = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(historicDecisionInstance);
 			
+		LOGGER.info(serializedHistoricDecisionInstance);
 		
 		Client client = TransportClient.builder().build()
 		        .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
-
+				
 		
 		IndexResponse response = client.prepareIndex("camunda", "historicDecision", historicDecisionInstance.getId())
 		        .setSource(serializedHistoricDecisionInstance)
