@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class LoadToElasticSearch implements JavaDelegate {
 	
-	protected static final Logger LOGGER = Logger.getLogger(HistoricDecisionListener.class.getName());
+	protected static final Logger LOGGER = Logger.getLogger(LoadToElasticSearch.class.getName());
 	@Override
 	public void execute(DelegateExecution execution) throws Exception {
 		
