@@ -68,10 +68,13 @@ public class RandomGeneratorUtil {
 	public double getRandomClaimAmount()
 	{
 		if(randomBoolean(60)){
-			return randomNumber(1200);
-		}else{
-			return randomNumber(50000);
+			return randBetween(100, 1200);
+		}else if(randomBoolean(60)){
+			return randBetween(1201, 50000);
+		}else {
+			return randBetween(50001, 200000);
 		}
+			
 	}
 	
 	public boolean randomBoolean(int chanceOutOf100)
