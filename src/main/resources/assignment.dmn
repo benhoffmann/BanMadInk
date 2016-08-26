@@ -20,7 +20,7 @@
 </inputEntry>
         <inputEntry id="UnaryTests_0vidnl6">        <text><![CDATA[not("berlin")]]></text>
 </inputEntry>
-        <inputEntry id="UnaryTests_1h76e9g">        <text>[0.. 500000]</text>
+        <inputEntry id="UnaryTests_1h76e9g">        <text>[0.. 50000]</text>
 </inputEntry>
         <outputEntry id="LiteralExpression_0t9xb70">        <text><![CDATA["John"]]></text>
 </outputEntry>
@@ -30,7 +30,7 @@
 </inputEntry>
         <inputEntry id="UnaryTests_0ueoldz">        <text><![CDATA["austin", "pretoria"]]></text>
 </inputEntry>
-        <inputEntry id="UnaryTests_0kwkun0">        <text><![CDATA[>100000]]></text>
+        <inputEntry id="UnaryTests_0kwkun0">        <text><![CDATA[>10000]]></text>
 </inputEntry>
         <outputEntry id="LiteralExpression_0lvnxnk">        <text><![CDATA["Mary"]]></text>
 </outputEntry>
@@ -50,7 +50,7 @@
 </inputEntry>
         <inputEntry id="UnaryTests_0k1n91o">        <text></text>
 </inputEntry>
-        <inputEntry id="UnaryTests_0uxss5p">        <text>[0.. 100000]</text>
+        <inputEntry id="UnaryTests_0uxss5p">        <text>[0.. 10000]</text>
 </inputEntry>
         <outputEntry id="LiteralExpression_0emibd1">        <text><![CDATA["Dave"]]></text>
 </outputEntry>
@@ -80,7 +80,7 @@
 </inputEntry>
         <inputEntry id="UnaryTests_0mt71vr">        <text></text>
 </inputEntry>
-        <inputEntry id="UnaryTests_1bkahjq">        <text>[2500.. 800000]</text>
+        <inputEntry id="UnaryTests_1bkahjq">        <text>[2500.. 80000]</text>
 </inputEntry>
         <outputEntry id="LiteralExpression_0epdx4e">        <text><![CDATA["Niall"]]></text>
 </outputEntry>
@@ -90,7 +90,7 @@
 </inputEntry>
         <inputEntry id="UnaryTests_0emrh9y">        <text></text>
 </inputEntry>
-        <inputEntry id="UnaryTests_1qs29a9">        <text><![CDATA[>100000]]></text>
+        <inputEntry id="UnaryTests_1qs29a9">        <text><![CDATA[>10000]]></text>
 </inputEntry>
         <outputEntry id="LiteralExpression_0kynqg2">        <text><![CDATA["Andy"]]></text>
 </outputEntry>
