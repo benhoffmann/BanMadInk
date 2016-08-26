@@ -119,9 +119,7 @@ public class LoadToElasticSearch implements JavaDelegate {
 				mapper.setDateFormat(df);
 	
 				 String serializedHistoricDecisionInstance = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(fraudData);
-					
-				LOGGER.info(serializedHistoricDecisionInstance);
-				
+									
 	
 				IndexResponse response = client.prepareIndex("camunda", "fraudData", historicDecisionInstance.getId())
 				        .setSource(serializedHistoricDecisionInstance)

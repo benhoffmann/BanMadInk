@@ -71,9 +71,7 @@ public class HistoricDecisionListener implements ExecutionListener {
 		ObjectMapper mapper = new ObjectMapper();
 
 		 String serializedHistoricDecisionInstance = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(fraudData);
-			
-		LOGGER.info(serializedHistoricDecisionInstance);
-		
+					
 		Client client = TransportClient.builder().build()
 		        .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
 				
