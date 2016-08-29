@@ -73,14 +73,6 @@
     <bpmn:sequenceFlow id="SequenceFlow_0hq8s6y" name="Yes" sourceRef="ExclusiveGateway_0rzzhok" targetRef="Task_0vu5yqs">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">#{audit}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:intermediateThrowEvent id="IntermediateThrowEvent_0l7781p" name="Upload Test" camunda:asyncBefore="true">
-      <bpmn:extensionElements>
-        <camunda:inputOutput>
-          <camunda:inputParameter name="tableName">fraudRating</camunda:inputParameter>
-        </camunda:inputOutput>
-        <camunda:executionListener class="org.camunda.hackdays2016.BanMadInkProcesses.HistoricDecisionListener" event="start" />
-      </bpmn:extensionElements>
-    </bpmn:intermediateThrowEvent>
     <bpmn:sequenceFlow id="SequenceFlow_10b6jax" sourceRef="Task_0zeut6n" targetRef="Task_DecideOnFurtherFraudCheck" />
     <bpmn:sequenceFlow id="SequenceFlow_142cb5z" sourceRef="Task_DecideOnFurtherFraudCheck" targetRef="ExclusiveGateway_0rzzhok" />
   </bpmn:process>
@@ -208,12 +200,6 @@
           <dc:Bounds x="1404" y="95" width="90" height="20" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="IntermediateThrowEvent_0l7781p_di" bpmnElement="IntermediateThrowEvent_0l7781p">
-        <dc:Bounds x="1251" y="-35" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1224" y="1" width="90" height="20" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_10b6jax_di" bpmnElement="SequenceFlow_10b6jax">
         <di:waypoint xsi:type="dc:Point" x="985" y="120" />
         <di:waypoint xsi:type="dc:Point" x="1085" y="120" />
